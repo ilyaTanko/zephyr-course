@@ -86,4 +86,6 @@ config APP_HEARTBEAT_PERIOD_MS
     help
       "The period in milliseconds for the heartbeat LED to toggle."
 
-source "Kconfig.zephyr"
+menu "Zephyr configuration"
+  source "Kconfig.zephyr"
+endmenu
