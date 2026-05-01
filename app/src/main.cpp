@@ -3,8 +3,7 @@
 #include <zephyr/logging/log.h>
 #include <zephyr/sys/util.h>
 
-/* The devicetree node identifier for the "led0" alias. */
-#define LED_NODE DT_ALIAS(led0)
+#define LED_NODE DT_ALIAS(app_led)
 
 static const struct gpio_dt_spec led = GPIO_DT_SPEC_GET(LED_NODE, gpios);
 
@@ -16,7 +15,7 @@ static constexpr bool led_advanced_settings = IS_ENABLED(CONFIG_LED_ADVANCED_SET
 static void log_led_settings() {
     if (led_debugging) {
         LOG_INF("LED subsystem enabled");
-        LOG_INF("Blink interval: %d ms", CONFIG_BLINK_SLEEP_TIME_MS);
+        LOG_INF("Blink interval: %d ms", CONFIG_APP_HEARTBEAT_PERIOD_MS);
     }
 
     if (led_advanced_settings) {
@@ -49,7 +48,7 @@ int main() {
             LOG_INF("LED state: %s", led_state ? "ON" : "OFF");
         }
 
-        k_msleep(CONFIG_BLINK_SLEEP_TIME_MS);
+        k_msleep(CONFIG_APP_HEARTBEAT_PERIOD_MS);
     }
     return 0;
 }
