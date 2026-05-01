@@ -1,0 +1,14 @@
+identifier: our_board/nrf5340/cpunet
+name: Our-Board-network-MCU
+type: mcu
+arch: arm
+toolchain:
+  - gnuarmemb
+  - zephyr
+ram: 64
+flash: 256
+supported:
+  - arduino_gpio
+  - watchdog
+  - gpio
+vendor: iomico

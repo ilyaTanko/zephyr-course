@@ -1,0 +1,9 @@
+board:
+  name: our_board
+  full_name: Our Board
+  vendor: iomico
+  socs:
+  - name: 'nrf5340'
+    variants:
+    - name: 'ns'
+      cpucluster: 'cpuapp'
