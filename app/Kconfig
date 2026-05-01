@@ -79,4 +79,11 @@ endif # LED_ADVANCED_SETTINGS
 endif # LED_SUBSYSTEM
 
 
+config APP_HEARTBEAT_PERIOD_MS
+    int "Heartbeat period (ms)"
+    default 500
+    range 100 2000
+    help
+      "The period in milliseconds for the heartbeat LED to toggle."
+
 source "Kconfig.zephyr"
