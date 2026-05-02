@@ -4,7 +4,7 @@
 
 / {
 	model = "Our Board Application";
-	compatible = "nordic,nrf5340-dk-nrf5340-cpuapp";
+	compatible = "iomico,nrf5340-dk-nrf5340-cpuapp";
 
 	chosen {
 		zephyr,sram = &sram0_image;

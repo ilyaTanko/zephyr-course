@@ -1,0 +1,9 @@
+identifier: our_scratch_board/nrf52833
+name: Our Scratch Board
+type: mcu
+arch: arm
+ram: 128
+flash: 512
+toolchain:
+  - zephyr
+  - gnuarmemb
