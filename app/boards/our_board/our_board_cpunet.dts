@@ -6,7 +6,7 @@
 
 / {
 	model = "Our Board Network";
-	compatible = "nordic,nrf5340-dk-nrf5340-cpunet";
+	compatible = "iomico,nrf5340-dk-nrf5340-cpunet";
 
 	chosen {
 		zephyr,console = &uart0;

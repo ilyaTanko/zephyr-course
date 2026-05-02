@@ -1,0 +1,6 @@
+board:
+  name: our_scratch_board
+  full_name: Our Scratch Board
+  vendor: iomico
+  socs:
+  - name: nrf52833
