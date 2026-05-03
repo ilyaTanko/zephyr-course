@@ -1,0 +1,51 @@
+#include <zephyr/drivers/sensor.h>
+#include <zephyr/drivers/gpio.h>
+#include <zephyr/logging/log.h>
+
+#include "our_driver.h"
+
+LOG_MODULE_REGISTER(our_driver, LOG_LEVEL_INF);
+
+struct our_driver_config {
+    struct gpio_dt_spec led;
+};
+
+static int our_driver_sample_fetch(struct device const* dev, enum sensor_channel chan) {
+    LOG_INF("Sample fetch: LED on");
+    struct our_driver_config const* config = dev->config;
+    return gpio_pin_set_dt(&config->led, 1);
+}
+
+static int our_driver_channel_get(struct device const* dev, enum sensor_channel chan, struct sensor_value* val) {
+    LOG_INF("Channel get: LED off");
+    struct our_driver_config const* config = dev->config;
+    return gpio_pin_set_dt(&config->led, 0);
+}
+
+static int our_driver_init(struct device const* dev) {
+    struct our_driver_config const* config = dev->config;
+    if (!gpio_is_ready_dt(&config->led)) {
+        LOG_ERR("LED GPIO is not ready");
+        return -ENODEV;
+    }
+
+    LOG_INF("Our driver initialized");
+    return gpio_pin_configure_dt(&config->led, GPIO_OUTPUT_INACTIVE);
+}
+
+static DEVICE_API(sensor, our_driver_api) = {
+    .sample_fetch = our_driver_sample_fetch,
+    .channel_get = our_driver_channel_get,
+};
+
+#define OUR_DRIVER_CONFIG(inst) \
+    static const struct our_driver_config our_driver_config_##inst = { \
+        .led = GPIO_DT_SPEC_GET(DT_INST_PHANDLE(inst, led), gpios), \
+    }
+
+#define DEV_INST(inst) \
+    OUR_DRIVER_CONFIG(inst); \
+    DEVICE_DT_INST_DEFINE(inst, our_driver_init, NULL, NULL, &our_driver_config_##inst, \
+                          POST_KERNEL, CONFIG_KERNEL_INIT_PRIORITY_DEVICE, &our_driver_api)
+
+DT_INST_FOREACH_STATUS_OKAY(DEV_INST);
