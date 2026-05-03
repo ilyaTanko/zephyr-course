@@ -1,0 +1,6 @@
+config OUR_DRIVER
+    bool "Our simple GPIO driver"
+    depends on GPIO
+    depends on SENSOR
+    help
+      Enable support for our simple GPIO driver.
