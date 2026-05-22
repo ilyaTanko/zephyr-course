@@ -40,7 +40,7 @@ int main() {
         LOG_INF("Sensor channel get result: %d", ret);
         k_msleep(CONFIG_APP_HEARTBEAT_PERIOD_MS);
 
-        uint32_t counter = our_driver_increment(dev);
+        uint32_t counter = our_driver_increment(dev, 1);
         LOG_INF("Our driver increment result: %u", counter);
     }
 

@@ -25,17 +25,20 @@ static int our_driver_channel_get(struct device const* dev, enum sensor_channel 
     (void)chan;
     (void)val;
 
+    struct our_driver_data* data = dev->data;
+    uint32_t counter = data->counter;
+
     LOG_INF("Channel get: LED off");
     struct our_driver_config const* config = dev->config;
     int result = gpio_pin_set_dt(&config->led, 0);
     val->val1 = result;
-    val->val2 = 0;
+    val->val2 = counter;
     return result;
 }
 
-static uint32_t our_driver_increment_impl(struct device const* dev) {
+static uint32_t our_driver_increment_impl(struct device const* dev, uint32_t value) {
     struct our_driver_data* data = dev->data;
-    data->counter++;
+    data->counter += value;
     return data->counter;
 }
 

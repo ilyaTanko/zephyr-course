@@ -15,16 +15,16 @@ extern "C" {
 
 struct our_driver_api {
     struct sensor_driver_api sensor;
-    uint32_t (*increment)(struct device const* dev);
+    uint32_t (*increment)(struct device const* dev, uint32_t value);
 };
 
-static inline int our_driver_increment(struct device const* dev) {
+static inline int our_driver_increment(struct device const* dev, uint32_t value) {
     struct our_driver_api const* api = (struct our_driver_api const*)dev->api;
     if ((api == NULL) || (api->increment == NULL)) {
         return -ENOSYS;
     }
 
-    return api->increment(dev);
+    return api->increment(dev, value);
 }
 
 #ifdef __cplusplus
