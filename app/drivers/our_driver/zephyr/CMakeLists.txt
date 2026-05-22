@@ -1,4 +1,7 @@
 if (CONFIG_OUR_DRIVER)
     zephyr_library()
     zephyr_library_sources(../our_driver.c)
+    if (CONFIG_SHELL)
+        zephyr_library_sources(../our_driver_shell.c)
+    endif()
 endif()

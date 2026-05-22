@@ -14,15 +14,23 @@ struct our_driver_data {
 };
 
 static int our_driver_sample_fetch(struct device const* dev, enum sensor_channel chan) {
+    (void)chan;
+
     LOG_INF("Sample fetch: LED on");
     struct our_driver_config const* config = dev->config;
     return gpio_pin_set_dt(&config->led, 1);
 }
 
 static int our_driver_channel_get(struct device const* dev, enum sensor_channel chan, struct sensor_value* val) {
+    (void)chan;
+    (void)val;
+
     LOG_INF("Channel get: LED off");
     struct our_driver_config const* config = dev->config;
-    return gpio_pin_set_dt(&config->led, 0);
+    int result = gpio_pin_set_dt(&config->led, 0);
+    val->val1 = result;
+    val->val2 = 0;
+    return result;
 }
 
 static uint32_t our_driver_increment_impl(struct device const* dev) {
