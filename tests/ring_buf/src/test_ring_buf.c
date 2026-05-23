@@ -8,6 +8,20 @@
  * Run:
  *   west twister -T tests/ring_buf -p native_sim
  *   west twister -T tests/ring_buf -p qemu_x86 -s homework.unit.ring_buf --short-build-path -vvv
+ *
+ * Coverage run with:
+ * (from git bash terminal, Windows env)
+ *  subst Z: <current project dir>
+ *  cd /z
+ *  west twister -T tests/ring_buf -p qemu_x86 -s homework.unit.ring_buf --short-build-path -vvv --coverage --coverage-tool gcovr --coverage-basedir app/modules/ring_buf --gcov-tool x86_64-zephyr-elf-gcov.exe -x 'CONFIG_COVERAGE_DUMP_PATH_EXCLUDE="*zephyr*"' -x CONFIG_COVERAGE_GCOV_HEAP_SIZE=65536
+ *
+ *  path handling is terrible
+ *  doesn't work without --short-build-path
+ *  doesn't work without path aliasing
+ *  too long paths -> gcovr fails to find .gcda files
+ *
+ *  location to x86_64-zephyr-elf-gcov.exe was also added to PATH
+ *  otherwise twister/gcovr couldn't parse it's Windows path correctly
  */
 
 #include <zephyr/ztest.h>
@@ -99,11 +113,6 @@ ZTEST(ring_buf_push_pop, test_push_full_returns_enospc) {
 ZTEST_SUITE(ring_buf_boundaries, NULL, NULL, before, NULL, NULL);
 
 ZTEST(ring_buf_boundaries, test_peek_does_not_consume) {
-	/* TODO(l8-task1): rb_push(7); rb_peek(&v) -> v == 7; rb_peek(&v) again
-	 * -> v == 7; rb_count() still == 1.
-	 * See TEST_SPEC.md "Suite ring_buf_boundaries" #1.
-	 */
-
 	zassume_ok(rb_push(7), "Push should succeed");
 
 	int v;
