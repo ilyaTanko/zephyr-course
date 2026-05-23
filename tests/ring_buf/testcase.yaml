@@ -7,7 +7,14 @@ common:
 
 tests:
   homework.unit.ring_buf:
-    platform_allow: 
+    platform_allow:
+     - native_sim
+     - qemu_x86
+    timeout: 180
+
+  homework.unit.ring_buf.ordered:
+    platform_allow:
      - native_sim
      - qemu_x86
     timeout: 60
+    extra_args: CONFIG_ZTEST_SHUFFLE=n

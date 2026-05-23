@@ -3,6 +3,7 @@
  *
  * Run with:
  *   west twister -T tests/calculator -p native_sim
+ *   west twister -T tests/calculator -p qemu_x86 -s example.unit.calculator.ordered --short-build-path
  */
 
 #include <zephyr/ztest.h>
@@ -262,7 +263,7 @@ ZTEST(calculator_div, test_negative_dividend_truncation)
  * ============================================================================
  * Test Suite: calculator_edge_cases
  *
- * Covers remaining assertion macros (zassume_*, zexpect_*) and multi-step scenarios. 
+ * Covers remaining assertion macros (zassume_*, zexpect_*) and multi-step scenarios.
  * ============================================================================
  */
 ZTEST_SUITE(calculator_edge_cases, NULL, NULL, before, NULL, NULL);

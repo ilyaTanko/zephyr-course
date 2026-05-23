@@ -30,9 +30,9 @@ bool rb_is_full(void);
 size_t rb_count(void);
 ```
 
-> Before starting homework, read the full API reference in `include/ring_buf.h`. The implementation 
+> Before starting homework, read the full API reference in `include/ring_buf.h`. The implementation
 > in `src/ring_buf.c` is under 100 lines of code, so you can read it in its entirety if you like.
-> The tests will be black-box, so you don't need to understand the implementation to write them, 
+> The tests will be black-box, so you don't need to understand the implementation to write them,
 > but reading the code may help you understand the expected behavior and edge cases.
 
 ## Provided Infrastructure
@@ -153,8 +153,7 @@ Branches:  64.3%  (9/14)
    eventually tests where not implemented according to the spec. Go back and check each
    test body against the spec to find the missing one(s).
 4. Look at the red lines. Think about **why** those paths are not exercised by the spec.
-   Ask yourself: *what test case(s) would be needed to cover those lines?* (no need to 
-   implement them, just think about it).
+   Ask yourself: *what test case(s) would be needed to cover those lines?* (no need to implement them, just think about it).
 
 ### Tag `l8-task2`
 
